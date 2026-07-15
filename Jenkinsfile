@@ -4,8 +4,7 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                // Replace with your GitHub repo URL
-                git branch: 'main', url: 'https://github.com/parshapalliglory-0345/two-tier-flask-app'
+                git branch: 'main', url: 'https://github.com/parshapalliglory-0345/two-tier-flask-app.git'
             }
         }
         stage('Build Docker Image') {
