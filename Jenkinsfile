@@ -11,10 +11,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh '''
-                    echo "Starting Docker build..."
-                    docker build -t flask-app:latest .
-                '''
+                sh 'echo hello-world'
             }
         }
 
