@@ -4,14 +4,16 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Use Jenkins built-in SCM checkout instead of manual git step
                 checkout scm
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'echo hello-world'
+                sh '''
+                    echo "Starting Docker build..."
+                    docker build -t flask-app:latest .
+                '''
             }
         }
 
