@@ -2,20 +2,29 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Code') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/parshapalliglory-0345/two-tier-flask-app.git'
+                // Use Jenkins built-in SCM checkout instead of manual git step
+                checkout scm
             }
         }
+
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t flask-app:latest .'
+                sh '''
+                    echo "Starting Docker build..."
+                    docker build -t flask-app:latest .
+                '''
             }
         }
+
         stage('Deploy with Docker Compose') {
             steps {
-                sh 'docker compose down || true'
-                sh 'docker compose up -d --build'
+                sh '''
+                    echo "Starting Docker Compose deployment..."
+                    docker compose down || true
+                    docker compose up -d --build
+                '''
             }
         }
     }
